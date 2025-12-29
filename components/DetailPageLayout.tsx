@@ -11,15 +11,7 @@ import {
   ChartTooltipContent,
   ChartConfig,
 } from "@/components/ui/chart";
-import {
-  Link2,
-  Bookmark,
-  Info,
-  ChevronDown,
-  FileText,
-  Code,
-  Settings,
-} from "lucide-react";
+import { Info, ChevronDown, FileText, Code, Settings } from "lucide-react";
 
 const rawChartData = [
   { time: new Date("2024-12-29T08:00:00").getTime(), probability: 85 },
@@ -46,7 +38,6 @@ const chartConfig = {
 
 function filterByRange(data: typeof rawChartData, range: string) {
   if (range === "ALL") return data;
-
   const now = Math.max(...data.map((d) => d.time));
 
   const ranges: Record<string, number> = {
@@ -61,10 +52,8 @@ function filterByRange(data: typeof rawChartData, range: string) {
   return data.filter((d) => d.time >= cutoff);
 }
 
-//page
 export default function MarketDetailPage() {
   const [timeRange, setTimeRange] = useState("ALL");
-
   const chartData = useMemo(
     () => filterByRange(rawChartData, timeRange),
     [timeRange]
@@ -74,60 +63,39 @@ export default function MarketDetailPage() {
     <div className="min-h-screen bg-[#0B1217] text-white">
       <Navbar />
 
-      <main className="container mx-auto px-4 lg:px-6 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6 max-w-[1320px] mx-auto">
+      {/* FULL WIDTH LAYOUT */}
+      <main className="px-6 py-6 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6 w-full">
+
           {/* LEFT COLUMN */}
           <div className="space-y-4">
+
             {/* HEADER */}
             <div className="flex items-start gap-4">
-              {/* IMAGE */}
               <img
                 src="/poly.webp"
                 alt="Market"
                 className="w-16 h-16 rounded-lg object-cover bg-[#1E2731]"
               />
 
-              {/* TEXT BLOCK */}
               <div className="flex-1 min-w-0">
-                {/* TITLE */}
-                <h1 className="text-[26px] leading-snug font-semibold text-white mb-1">
+                <h1 className="text-[26px] leading-snug font-semibold mb-1">
                   Will anyone be charged over Daycare fraud in Minnesota?
                 </h1>
 
-                {/* META */}
                 <div className="flex items-center gap-3 text-[18px] text-[#9AA4AF]">
                   <span>$205,005 Vol.</span>
                   <span className="flex items-center gap-1">
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                      className="opacity-70"
-                    >
-                      <circle
-                        cx="7"
-                        cy="7"
-                        r="6"
-                        stroke="currentColor"
-                        strokeWidth="1.2"
-                      />
-                      <path
-                        d="M7 3.5V7L9.5 9.5"
-                        stroke="currentColor"
-                        strokeWidth="1.2"
-                        strokeLinecap="round"
-                      />
+                    <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                      <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2" />
+                      <path d="M7 3.5V7L9.5 9.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                     </svg>
                     Jan 31, 2026
                   </span>
                 </div>
 
-                {/* PROBABILITY */}
                 <div className="flex items-center gap-2 mt-2">
-                  <span className="text-[22px] font-semibold text-[#3BA9FF]">
-                    44%
-                  </span>
+                  <span className="text-[22px] font-semibold text-[#3BA9FF]">44%</span>
                   <span className="text-[14px] text-[#3BA9FF]/80">chance</span>
                   <span className="flex items-center gap-1 text-[13px] text-red-400">
                     ▼ 43%
@@ -136,27 +104,24 @@ export default function MarketDetailPage() {
               </div>
             </div>
 
-            {/* CHART CARD */}
+            {/* CHART */}
             <div className="bg-[#141B22] border border-[#1E2731] rounded-xl p-4">
               <div className="flex items-end gap-2 mb-4">
-                <span className="text-5xl font-semibold text-[#4C82FB]">
-                  63%
-                </span>
+                <span className="text-5xl font-semibold text-[#4C82FB]">63%</span>
                 <span className="text-lg text-[#4C82FB]/80 mb-1">chance</span>
                 <span className="ml-2 text-green-500 text-sm">↑ 7%</span>
               </div>
 
-              <ChartContainer config={chartConfig} className="h-[280px] w-full">
+              <ChartContainer config={chartConfig} className="h-70 w-full">
                 <LineChart data={chartData}>
                   <CartesianGrid vertical={false} stroke="#1E2731" />
-
                   <XAxis
                     dataKey="time"
                     type="number"
                     scale="time"
                     domain={["dataMin", "dataMax"]}
-                    tickFormatter={(value) =>
-                      new Date(value).toLocaleTimeString([], {
+                    tickFormatter={(v) =>
+                      new Date(v).toLocaleTimeString([], {
                         hour: "numeric",
                         minute: "2-digit",
                       })
@@ -192,7 +157,6 @@ export default function MarketDetailPage() {
                 </LineChart>
               </ChartContainer>
 
-              {/* TIME RANGE CONTROLS */}
               <div className="flex justify-between items-center mt-3">
                 <div className="flex gap-1">
                   {["1H", "6H", "1D", "1W", "1M", "ALL"].map((range) => (
@@ -212,12 +176,7 @@ export default function MarketDetailPage() {
 
                 <div className="flex gap-1">
                   {[FileText, Code, Settings].map((Icon, i) => (
-                    <Button
-                      key={i}
-                      variant="ghost"
-                      size="icon"
-                      className="hover:bg-[#1A2128]"
-                    >
+                    <Button key={i} variant="ghost" size="icon" className="hover:bg-[#1A2128]">
                       <Icon className="w-4 h-4" />
                     </Button>
                   ))}
@@ -244,13 +203,12 @@ export default function MarketDetailPage() {
             <div className="bg-[#141B22] border border-[#1E2731] rounded-xl p-4">
               <span className="font-medium block mb-1">Rules</span>
               <p className="text-sm text-gray-400">
-                This market resolves to "Yes" if any Federal or State
-                jurisdiction formally charges…
+                This market resolves to "Yes" if any Federal or State jurisdiction formally charges…
               </p>
             </div>
           </div>
 
-          {/* RIGHT COLUMN */}
+          {/* RIGHT PANEL */}
           <div className="lg:sticky lg:top-6 h-fit">
             <TradePanel />
           </div>
