@@ -1,4 +1,5 @@
 import { Bookmark, Gift } from "lucide-react"
+import Link from "next/link";
 
 interface MarketCardProps {
   id: string
@@ -14,6 +15,7 @@ export function MarketCard({ id, title, image, mainProbability, volume }: Market
   const offset = circumference - (mainProbability / 100) * circumference
 
   return (
+  <Link href={`/market/${id}`}>
     <div className="bg-slate-900 rounded-2xl border border-slate-800 hover:border-slate-700 transition-colors overflow-hidden cursor-pointer w-full max-w-xl">
       
       {/* HEADER */}
@@ -89,5 +91,6 @@ export function MarketCard({ id, title, image, mainProbability, volume }: Market
         </div>
       </div>
     </div>
+    </Link>
   )
 }
