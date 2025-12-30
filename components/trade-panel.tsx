@@ -6,22 +6,23 @@ import { Button } from "@/components/ui/button";
 export function TradePanel() {
   const [mode, setMode] = useState<"buy" | "sell">("buy");
   const [selection, setSelection] = useState<"yes" | "no">("yes");
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState<number | null>(null);
 
   const priceYes = 46;
   const priceNo = 55;
 
   function addAmount(v: number) {
-    setAmount((prev) => prev + v);
+    setAmount(prev => (prev ?? 0) + v);
   }
 
   return (
-    <div className="bg-[#0F1620] border border-[#1E2731] rounded-2xl p-6 w-full max-w-xl">
+    <div className="bg-[#2a2c33] border-2 border-[#1E2731] rounded-2xl p-5 w-full max-w-lg">
+      
       {/* TABS */}
-      <div className="flex items-center mb-6 border-b border-[#1E2731] text-lg">
+      <div className="flex items-center mb-5 border-b border-[#1E2731] text-base">
         <button
           onClick={() => setMode("buy")}
-          className={`px-6 py-3 ${
+          className={`px-5 py-2.5 ${
             mode === "buy"
               ? "text-white border-b-2 border-white"
               : "text-gray-400"
@@ -32,7 +33,7 @@ export function TradePanel() {
 
         <button
           onClick={() => setMode("sell")}
-          className={`px-6 py-3 ${
+          className={`px-5 py-2.5 ${
             mode === "sell"
               ? "text-white border-b-2 border-white"
               : "text-gray-400"
@@ -43,78 +44,94 @@ export function TradePanel() {
       </div>
 
       {/* YES / NO */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-3 w-full">
         <button
           onClick={() => setSelection("yes")}
-          className={`p-5 rounded-xl text-left font-semibold text-lg transition ${
-            selection === "yes"
-              ? "bg-[#3BAB68] hover:bg-[#3BAB68] text-white"
-              : "bg-[#141C26] text-gray-400"
-          }`}
+          className={`
+            h-14
+            rounded-xl
+            font-semibold
+            text-base
+            transition-all
+            duration-200
+            flex items-center justify-center
+            ${
+              selection === "yes"
+                ? "bg-[#3BAB68] text-white shadow-[0_0_18px_#3bab6835]"
+                : "bg-[#141C26] text-gray-400 hover:bg-[#1C2533]"
+            }
+          `}
         >
           Yes {priceYes}¢
         </button>
 
         <button
           onClick={() => setSelection("no")}
-          className={`p-5 rounded-xl text-left font-semibold text-lg transition ${
-            selection === "no"
-              ? "bg-red-600 hover:bg-red-500 text-white"
-              : "bg-[#141C26] text-gray-400"
-          }`}
+          className={`
+            h-14
+            rounded-xl
+            font-semibold
+            text-base
+            transition-all
+            duration-200
+            flex items-center justify-center
+            ${
+              selection === "no"
+                ? "bg-[#E04444] text-white shadow-[0_0_18px_#e0444435]"
+                : "bg-[#141C26] text-gray-400 hover:bg-[#1C2533]"
+            }
+          `}
         >
           No {priceNo}¢
         </button>
       </div>
 
       {/* AMOUNT */}
-      <div className="mt-8">
-        <p className="text-base text-gray-300 mb-1">Amount</p>
-        <p className="text-sm text-gray-500 mb-3">Balance $0.00</p>
+      <div className="mt-7">
+        <p className="text-sm text-gray-300 mb-1">Amount</p>
+        <p className="text-xs text-gray-500 mb-3">Balance $0.00</p>
 
-        {/* USER INPUT */}
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex-1">
-            <input
-              type="number"
-              value={amount}
-              onChange={(e) => setAmount(Number(e.target.value))}
-              className="w-full bg-[#141C26] border border-[#243042] rounded-xl text-white text-3xl px-5 py-4 outline-none"
-              placeholder="Enter amount"
-              min={0}
-            />
-          </div>
-
-          <div className="text-5xl font-bold text-gray-300">
-            ${amount || 0}
-          </div>
+        <div className="flex items-center justify-end gap-2 border-[#1E2731] rounded-xl px-4 py-3.5">
+          <input
+            type="number"
+            value={amount === null ? "" : amount}
+            onChange={e =>
+              setAmount(e.target.value === "" ? null : Number(e.target.value))
+            }
+            className="bg-transparent border-none outline-none text-white text-3xl font-bold text-right w-[140px]
+                       [appearance:textfield] 
+                       [&::-webkit-outer-spin-button]:appearance-none 
+                       [&::-webkit-inner-spin-button]:appearance-none"
+            placeholder="$0"
+            min={0}
+          />
         </div>
 
-        {/* QUICK ADD BUTTONS */}
-        <div className="flex gap-3 mt-5">
+        {/* QUICK ADD */}
+        <div className="flex gap-2.5 mt-4">
           <button
-            className="bg-[#1E2731] px-5 py-3 rounded-md text-base text-gray-200"
+            className="bg-[#1E2731] px-4 py-2.5 rounded-md text-sm text-gray-200"
             onClick={() => addAmount(1)}
           >
             +$1
           </button>
 
           <button
-            className="bg-[#1E2731] px-5 py-3 rounded-md text-base text-gray-200"
+            className="bg-[#1E2731] px-4 py-2.5 rounded-md text-sm text-gray-200"
             onClick={() => addAmount(20)}
           >
             +$20
           </button>
 
           <button
-            className="bg-[#1E2731] px-5 py-3 rounded-md text-base text-gray-200"
+            className="bg-[#1E2731] px-4 py-2.5 rounded-md text-sm text-gray-200"
             onClick={() => addAmount(100)}
           >
             +$100
           </button>
 
           <button
-            className="bg-[#1E2731] px-5 py-3 rounded-md text-base text-gray-200"
+            className="bg-[#1E2731] px-4 py-2.5 rounded-md text-sm text-gray-200"
             onClick={() => setAmount(1000)}
           >
             Max
@@ -123,7 +140,7 @@ export function TradePanel() {
       </div>
 
       {/* CTA */}
-      <Button className="w-full mt-8 py-7 text-xl bg-[#4B8BFF] hover:bg-[#3574E6]">
+      <Button className="w-full mt-7 py-6 text-lg bg-primary hover:bg-[#3574E6]">
         {mode === "buy"
           ? `Buy ${selection === "yes" ? "Yes" : "No"}`
           : `Sell ${selection === "yes" ? "Yes" : "No"}`}

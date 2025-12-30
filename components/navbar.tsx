@@ -26,7 +26,7 @@ const categories = [
 
 export function Navbar() {
   return (
-    <div className="bg-slate-900 text-white sticky top-0 z-50 shadow-md pt-2 border-b border-slate-700  ">
+    <div className="bg-[#1a1b1e] text-white sticky top-0 z-50 shadow-md pt-2 border-b border-slate-700  ">
       {/* Main Header */}
       <div className=" border-slate-700">
         <div className="flex items-center justify-between px-4 py-3">
@@ -46,13 +46,13 @@ export function Navbar() {
 
           {/* Right Navigation */}
           <div className="flex items-center gap-4">
-            <button className="text-blue-400 hover:text-blue-300 flex items-center gap-1 text-lg">
+            <button>
               <span>How it works</span>
             </button>
-            <Button  className="text-lg">
+            <Button className="bg-transparent hover:bg-primary">
               Log In
             </Button>
-            <Button className="bg-blue-500 hover:bg-blue-600 text-white text-lg">Sign Up</Button>
+            <Button >Sign Up</Button>
             <button className="p-2 hover:bg-slate-800 rounded">
               <Menu className="w-5 h-5" />
             </button>
@@ -66,7 +66,7 @@ export function Navbar() {
           {categories.map((category) => (
             <button
               key={category}
-              className={`whitespace-nowrap text-lg transition-colors ${
+              className={`whitespace-nowrap text-md transition-colors ${
                 category === "Trending"
                   ? "text-white font-semibold flex items-center gap-1"
                   : "text-slate-400 hover:text-slate-300"
