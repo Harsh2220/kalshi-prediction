@@ -126,9 +126,9 @@ export function Page() {
   const [searchQuery, setSearchQuery] = useState("")
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-[#1a1b1e] text-white">
       {/* Search and Filter Bar */}
-      <div className=" border-b border-slate-700 bg-slate-900/95 backdrop-blur-sm p-4">
+      <div className=" border-b border-slate-700 bg-[#1a1b1e] backdrop-blur-sm p-4">
         <div className="flex items-center gap-4 overflow-x-auto pb-1">
 
           {/* Search */}
@@ -139,17 +139,17 @@ export function Page() {
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 bg-slate-800 border-slate-700 text-white placeholder-slate-400"
+              className="pl-10 bg-slate-800 border-slate-700 text-white placeholder-slate-400 placeholder::text-md"
             />
           </div>
 
           {/* Buttons */}
           <div className="flex items-center gap-6 shrink-0">
           
-              <Settings className="w-6 h-6  text-slate-500" />
+              <Settings className="w-5 h-5  text-slate-500" />
        
             
-              <Bookmark className="w-6 h-6  text-slate-500" />
+              <Bookmark className="w-5 h-5  text-slate-500" />
          
           </div>
 
@@ -159,8 +159,8 @@ export function Page() {
               <button
                 key={tab}
                 onClick={() => setActiveFilter(tab)}
-                className={`whitespace-nowrap px-3 py-1 rounded-md text-lg transition-colors ${activeFilter === tab
-                    ? "bg-blue-500 text-white "
+                className={`whitespace-nowrap px-3 py-1 rounded-md text-md transition-colors ${activeFilter === tab
+                    ? "bg-primary text-white font-semibold"
                     : "text-slate-400 hover:text-slate-200"
                   }`}
               >

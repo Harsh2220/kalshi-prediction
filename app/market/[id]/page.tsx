@@ -11,7 +11,7 @@ import {
   ChartTooltipContent,
   ChartConfig,
 } from "@/components/ui/chart";
-import { Info, ChevronDown, FileText, Code, Settings } from "lucide-react";
+import { FileText, Code, Settings } from "lucide-react";
 
 type PageProps = {
   params: {
@@ -68,29 +68,26 @@ export default function MarketDetailPage({ params }: PageProps) {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B1217] text-white">
-      
+    <div className="min-h-screen bg-[#1a1b1e] text-white">
+      <main className="px-5 py-6 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-5 w-full">
 
-      <main className="px-6 py-6 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6 w-full">
-
-          {/* LEFT COLUMN */}
+          {/* LEFT */}
           <div className="space-y-4">
-
             {/* HEADER */}
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-3">
               <img
                 src="/poly.webp"
                 alt="Market"
-                className="w-16 h-16 rounded-lg object-cover bg-[#1E2731]"
+                className="w-14 h-14 rounded-lg object-cover bg-[#1E2731]"
               />
 
               <div className="flex-1 min-w-0">
-                <h1 className="text-[26px] leading-snug font-semibold mb-1">
+                <h1 className="text-[22px] leading-snug font-semibold mb-1">
                   Market ID: {id}
                 </h1>
 
-                <div className="flex items-center gap-3 text-[18px] text-[#9AA4AF]">
+                <div className="flex items-center gap-3 text-[15px] text-[#9AA4AF]">
                   <span>$205,005 Vol.</span>
                   <span className="flex items-center gap-1">
                     <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
@@ -101,10 +98,10 @@ export default function MarketDetailPage({ params }: PageProps) {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2 mt-2">
-                  <span className="text-[22px] font-semibold text-[#3BA9FF]">44%</span>
-                  <span className="text-[14px] text-[#3BA9FF]/80">chance</span>
-                  <span className="flex items-center gap-1 text-[13px] text-red-400">
+                <div className="flex items-center gap-2 mt-1.5">
+                  <span className="text-[18px] font-semibold text-primary">44%</span>
+                  <span className="text-[13px] text-accent">chance</span>
+                  <span className="flex items-center gap-1 text-[12px] text-red-400">
                     ▼ 43%
                   </span>
                 </div>
@@ -112,14 +109,14 @@ export default function MarketDetailPage({ params }: PageProps) {
             </div>
 
             {/* CHART */}
-            <div className="bg-[#141B22] border border-[#1E2731] rounded-xl p-4">
-              <div className="flex items-end gap-2 mb-4">
-                <span className="text-5xl font-semibold text-[#4C82FB]">63%</span>
-                <span className="text-lg text-[#4C82FB]/80 mb-1">chance</span>
-                <span className="ml-2 text-green-500 text-sm">↑ 7%</span>
+            <div className="bg-[#2a2c33] border-2 border-[#1E2731] rounded-xl p-3.5">
+              <div className="flex items-end gap-2 mb-3">
+                <span className="text-4xl font-semibold text-primary">63%</span>
+                <span className="text-base text-accent- mb-1">chance</span>
+                <span className="ml-2 text-green-500 text-xs">↑ 7%</span>
               </div>
 
-              <ChartContainer config={chartConfig} className="h-70 w-full">
+              <ChartContainer config={chartConfig} className="h-64 w-full">
                 <LineChart data={chartData}>
                   <CartesianGrid vertical={false} stroke="#1E2731" />
                   <XAxis
@@ -156,7 +153,7 @@ export default function MarketDetailPage({ params }: PageProps) {
                     type="monotone"
                     dataKey="probability"
                     stroke="#4C82FB"
-                    strokeWidth={2.5}
+                    strokeWidth={2.2}
                     dot={false}
                     isAnimationActive
                     animationDuration={300}
@@ -172,7 +169,7 @@ export default function MarketDetailPage({ params }: PageProps) {
                       onClick={() => setTimeRange(range)}
                       className={`px-3 py-1.5 text-xs rounded-md ${
                         timeRange === range
-                          ? "bg-[#1E2731] text-white"
+                          ? "bg-primary text-white"
                           : "text-gray-500 hover:text-gray-300"
                       }`}
                     >
@@ -189,29 +186,6 @@ export default function MarketDetailPage({ params }: PageProps) {
                   ))}
                 </div>
               </div>
-            </div>
-
-            {/* ORDER BOOK */}
-            <div className="bg-[#141B22] border border-[#1E2731] rounded-xl p-4 flex justify-between">
-              <div className="flex gap-2 items-center">
-                <span className="font-medium">Order Book</span>
-                <Info className="w-4 h-4 text-gray-500" />
-              </div>
-              <ChevronDown className="w-5 h-5 text-gray-400" />
-            </div>
-
-            {/* MARKET CONTEXT */}
-            <div className="bg-[#141B22] border border-[#1E2731] rounded-xl p-4 flex justify-between">
-              <span className="font-medium">Market Context</span>
-              <button className="text-[#4C82FB] text-sm">Generate</button>
-            </div>
-
-            {/* RULES */}
-            <div className="bg-[#141B22] border border-[#1E2731] rounded-xl p-4">
-              <span className="font-medium block mb-1">Rules</span>
-              <p className="text-sm text-gray-400">
-                This market resolves to "Yes" if any Federal or State jurisdiction formally charges…
-              </p>
             </div>
           </div>
 
