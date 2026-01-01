@@ -16,28 +16,26 @@ export function TradePanel() {
   }
 
   return (
-    <div className=" border-2 border-[#1E2731] rounded-2xl p-5 w-full max-w-lg">
-      
+    <div className="border-2 border-[#1E2731] rounded-2xl p-5 w-full max-w-lg mx-auto">
+
       {/* TABS */}
       <div className="flex items-center mb-5 border-b border-[#1E2731] text-base">
         <button
           onClick={() => setMode("buy")}
-          className={`px-5 py-2.5 ${
-            mode === "buy"
+          className={`px-5 py-2.5 ${mode === "buy"
               ? "text-white border-b-2 border-white"
               : "text-gray-400"
-          }`}
+            }`}
         >
           Buy
         </button>
 
         <button
           onClick={() => setMode("sell")}
-          className={`px-5 py-2.5 ${
-            mode === "sell"
+          className={`px-5 py-2.5 ${mode === "sell"
               ? "text-white border-b-2 border-white"
               : "text-gray-400"
-          }`}
+            }`}
         >
           Sell
         </button>
@@ -55,10 +53,9 @@ export function TradePanel() {
             transition-all
             duration-200
             flex items-center justify-center
-            ${
-              selection === "yes"
-                ? "bg-[#3BAB68] text-white shadow-[0_0_18px_#3bab6835]"
-                : "bg-[#141C26] text-gray-400 hover:bg-[#1C2533]"
+            ${selection === "yes"
+              ? "bg-[#3BAB68] text-white shadow-[0_0_18px_#3bab6835]"
+              : "bg-[#141C26] text-gray-400 hover:bg-[#1C2533]"
             }
           `}
         >
@@ -75,10 +72,9 @@ export function TradePanel() {
             transition-all
             duration-200
             flex items-center justify-center 
-            ${
-              selection === "no"
-                ? "bg-[#E04444] text-white shadow-[0_0_18px_#e0444435]"
-                : "bg-[#141C26] text-gray-400 hover:bg-[#1C2533]"
+            ${selection === "no"
+              ? "bg-[#E04444] text-white shadow-[0_0_18px_#e0444435]"
+              : "bg-[#141C26] text-gray-400 hover:bg-[#1C2533]"
             }
           `}
         >
@@ -108,30 +104,30 @@ export function TradePanel() {
         </div>
 
         {/* QUICK ADD */}
-        <div className="flex gap-2.5 mt-4">
+        <div className="flex flex-wrap gap-2.5 mt-4">
           <button
-            className="bg-[#1E2731] px-4 py-2.5 rounded-md text-sm text-gray-200"
+            className="bg-[#1E2731] px-4 py-2.5 rounded-md text-sm text-gray-200 flex-1 min-w-[60px]"
             onClick={() => addAmount(1)}
           >
             +$1
           </button>
 
           <button
-            className="bg-[#1E2731] px-4 py-2.5 rounded-md text-sm text-gray-200"
+            className="bg-[#1E2731] px-4 py-2.5 rounded-md text-sm text-gray-200 flex-1 min-w-[60px]"
             onClick={() => addAmount(20)}
           >
             +$20
           </button>
 
           <button
-            className="bg-[#1E2731] px-4 py-2.5 rounded-md text-sm text-gray-200"
+            className="bg-[#1E2731] px-4 py-2.5 rounded-md text-sm text-gray-200 flex-1 min-w-[60px]"
             onClick={() => addAmount(100)}
           >
             +$100
           </button>
 
           <button
-            className="bg-[#1E2731] px-4 py-2.5 rounded-md text-sm text-gray-200"
+            className="bg-[#1E2731] px-4 py-2.5 rounded-md text-sm text-gray-200 flex-1 min-w-[60px]"
             onClick={() => setAmount(1000)}
           >
             Max

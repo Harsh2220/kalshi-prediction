@@ -161,36 +161,28 @@ export default function MarketDetailPage({ params }: PageProps) {
                 </LineChart>
               </ChartContainer>
 
-              <div className="flex justify-between items-center mt-3">
+              <div className="flex flex-wrap justify-between items-center mt-3 gap-y-2">
                 <div className="flex gap-1">
                   {["1H", "6H", "1D", "1W", "1M", "ALL"].map((range) => (
                     <button
                       key={range}
                       onClick={() => setTimeRange(range)}
-                      className={`px-3 py-1.5 text-xs rounded-md ${
-                        timeRange === range
-                          ? "bg-primary text-white"
-                          : "text-gray-500 hover:text-gray-300"
-                      }`}
+                      className={`px-3 py-1.5 text-xs md:text-md rounded-md ${timeRange === range
+                        ? "bg-primary text-white"
+                        : "text-gray-500 hover:text-gray-300"
+                        }`}
                     >
                       {range}
                     </button>
                   ))}
                 </div>
 
-                <div className="flex gap-1">
-                  {[FileText, Code, Settings].map((Icon, i) => (
-                    <Button key={i} variant="ghost" size="icon" className="hover:bg-[#1A2128]">
-                      <Icon className="w-4 h-4" />
-                    </Button>
-                  ))}
-                </div>
               </div>
             </div>
           </div>
 
           {/* RIGHT PANEL */}
-          <div className="lg:sticky lg:top-6 h-fit">
+          <div className="lg:sticky lg:top-6 h-fit flex justify-center lg:block">
             <TradePanel />
           </div>
         </div>
