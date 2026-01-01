@@ -1,6 +1,6 @@
 "use client"
 
-import { Search, Menu, TrendingUp} from "lucide-react"
+import { Search, Menu, TrendingUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -26,33 +26,44 @@ const categories = [
 
 export function Navbar() {
   return (
-    <div className="bg-[#1a1b1e] text-white sticky top-0 z-50 shadow-md pt-2 border-b border-slate-700  ">
+    <div className="bg-[#1a1b1e] text-white sticky top-0 z-50 shadow-md pt-2 border-b border-slate-700">
+      
       {/* Main Header */}
-      <div className=" border-slate-700">
+      <div className="border-slate-700">
         <div className="flex items-center justify-between px-4 py-3">
-          {/* Logo */}
+          
+          {/* Left Section */}
           <div className="flex items-center gap-2">
             <span className="text-xl font-semibold">Polymarket</span>
-             <div className="flex-1 max-w-md mx-8">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-500" />
-              <Input
-                placeholder="Search polymarket"
-                className="w-122 h-10 pl-10 bg-slate-800 border-slate-700 text-white placeholder:text-slate-500"
-              />
+
+            {/* Search (Hidden on mobile) */}
+            <div className="hidden md:flex flex-1 max-w-md mx-6">
+              <div className="relative w-full">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                <Input
+                  placeholder="Search polymarket"
+                  className="w-124 h-10 pl-10 bg-slate-800 border-slate-700 text-white placeholder:text-slate-500"
+                />
+              </div>
             </div>
-          </div>
           </div>
 
           {/* Right Navigation */}
-          <div className="flex items-center gap-4">
-            <button>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button className="hidden md:block">
               <span className="text-sm">How it works</span>
             </button>
-            <Button className="bg-transparent hover:bg-primary text-sm">
+
+            {/* Visible on mobile now */}
+            <Button className="bg-transparent hover:bg-primary text-sm px-3">
               Log In
             </Button>
-            <Button >Sign Up</Button>
+
+            <Button className="text-sm px-3">
+              Sign Up
+            </Button>
+
+            {/* Menu icon untouched */}
             <button className="p-2 hover:bg-slate-800 rounded">
               <Menu className="w-5 h-5" />
             </button>
@@ -61,7 +72,7 @@ export function Navbar() {
       </div>
 
       {/* Category Navigation */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto scrollbar-hide">
         <div className="flex items-center gap-6 px-4 py-3 min-w-max">
           {categories.map((category) => (
             <button
