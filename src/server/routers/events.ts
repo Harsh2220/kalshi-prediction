@@ -6,7 +6,7 @@ import z from "zod";
 export const eventsRouter = router({
   all: publicProcedure.query(async () => {
     const res = await fetch(
-      `${DFLOW_PREDICTION_BASE_API}/events?status=active`,
+      `${DFLOW_PREDICTION_BASE_API}/events?status=active&withNestedMarkets=true`,
       {
         headers: {
           "x-api-key": process.env.DFLOW_API_KEY!,

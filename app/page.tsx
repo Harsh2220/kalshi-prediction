@@ -19,14 +19,8 @@ export function Page() {
           gap-3 sm:gap-4
         "
         >
-          {data?.map((market) => (
-            <MarketCard
-              key={market.ticker}
-              id={market.ticker}
-              title={market.title}
-              image={market.imageUrl}
-              volume={market.volume}
-            />
+          {data?.map((event) => (
+            <MarketCard key={event.ticker} event={event} />
           ))}
         </div>
       </div>

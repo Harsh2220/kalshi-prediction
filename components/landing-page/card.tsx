@@ -3,17 +3,11 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Slider } from "@/components/ui/slider";
+import { Event } from "@/src/types/event";
 import Link from "next/link";
 import { useState } from "react";
 
-interface MarketCardProps {
-  id: string;
-  title: string;
-  image?: string;
-  volume: number;
-}
-
-export function MarketCard({ id, title, image, volume }: MarketCardProps) {
+export function MarketCard({ event }: { event: Event }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeSelection, setActiveSelection] = useState<"yes" | "no">("yes");
   const [betAmount, setBetAmount] = useState(10);
@@ -40,31 +34,23 @@ export function MarketCard({ id, title, image, volume }: MarketCardProps) {
           transition-all duration-300
         "
       >
-        <Link href={`/market/${id}`}>
-          {/* HEADER */}
+        <Link href={`/market/${event.ticker}`}>
           <div className="p-3 sm:p-4">
             <div className="flex gap-3 sm:gap-4">
-              {/* Image */}
               <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl overflow-hidden">
-                {image ? (
-                  <img
-                    src={image}
-                    alt={title}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-slate-500 text-xs sm:text-sm">
-                    No Img
-                  </div>
-                )}
+                <img
+                  src={event.imageUrl}
+                  alt={event.title}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               <div className="flex-1 min-w-0">
                 <h3 className="text-sm sm:text-base font-semibold text-white leading-snug line-clamp-2">
-                  {title}
+                  {event.title}
                 </h3>
                 <span className="text-[10px] sm:text-xs text-slate-400 block mt-1">
-                  ${volume} Volume
+                  ${event.volume} Volume
                 </span>
               </div>
             </div>
@@ -116,19 +102,15 @@ export function MarketCard({ id, title, image, volume }: MarketCardProps) {
             {/* Header */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3 flex-1">
-                {image ? (
-                  <img
-                    src={image}
-                    alt={title}
-                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-md object-cover bg-[#444654]"
-                  />
-                ) : (
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-md bg-[#444654]" />
-                )}
+                <img
+                  src={event.imageUrl}
+                  alt={event.title}
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-md object-cover"
+                />
 
                 <div className="flex-1 min-w-0">
                   <h2 className="font-semibold text-sm sm:text-base leading-tight">
-                    {title}
+                    {event.title}
                   </h2>
                 </div>
               </div>
