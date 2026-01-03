@@ -10,26 +10,13 @@ interface MarketCardProps {
   id: string;
   title: string;
   image?: string;
-  mainProbability: number;
-  volume: string;
+  volume: number;
 }
 
-export function MarketCard({
-  id,
-  title,
-  image,
-  mainProbability,
-  volume,
-}: MarketCardProps) {
-  const radius = 34;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (mainProbability / 100) * circumference;
-
+export function MarketCard({ id, title, image, volume }: MarketCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeSelection, setActiveSelection] = useState<"yes" | "no">("yes");
   const [betAmount, setBetAmount] = useState(10);
-
-  const winnings = Math.round(betAmount * (100 / Math.max(mainProbability, 1)));
 
   const openModal = (e: React.MouseEvent, selection: "yes" | "no") => {
     e.preventDefault();
@@ -72,63 +59,12 @@ export function MarketCard({
                 )}
               </div>
 
-              {/* Text */}
               <div className="flex-1 min-w-0">
                 <h3 className="text-sm sm:text-base font-semibold text-white leading-snug line-clamp-2">
                   {title}
                 </h3>
                 <span className="text-[10px] sm:text-xs text-slate-400 block mt-1">
-                  {volume} Volume
-                </span>
-              </div>
-
-              {/* Gauge */}
-              <div className="flex flex-col items-center scale-75 sm:scale-90 md:scale-100">
-                <div className="relative w-14 h-14 sm:w-16 sm:h-16">
-                  <svg className="w-full h-full -rotate-90" viewBox="0 0 80 80">
-                    <defs>
-                      <linearGradient
-                        id="probGradient"
-                        x1="0"
-                        y1="0"
-                        x2="1"
-                        y2="1"
-                      >
-                        <stop offset="0%" stopColor="#34d399" />
-                        <stop offset="100%" stopColor="#10b981" />
-                      </linearGradient>
-                    </defs>
-
-                    <circle
-                      cx="40"
-                      cy="40"
-                      r={radius}
-                      strokeWidth="6"
-                      className="stroke-slate-700"
-                      fill="none"
-                    />
-
-                    <circle
-                      cx="40"
-                      cy="40"
-                      r={radius}
-                      strokeWidth="6"
-                      strokeLinecap="round"
-                      fill="none"
-                      stroke="url(#probGradient)"
-                      strokeDasharray={circumference}
-                      strokeDashoffset={offset}
-                      className="transition-all duration-500"
-                    />
-                  </svg>
-
-                  <span className="absolute inset-0 flex items-center justify-center text-base sm:text-lg font-bold text-white">
-                    {mainProbability}%
-                  </span>
-                </div>
-
-                <span className="text-[10px] sm:text-xs text-slate-400 mt-1">
-                  chance
+                  ${volume} Volume
                 </span>
               </div>
             </div>
@@ -281,9 +217,6 @@ export function MarketCard({
               <div className="flex flex-col gap-1">
                 <span className="text-base sm:text-lg font-bold">
                   Buy {activeSelection === "yes" ? "Yes" : "No"}
-                </span>
-                <span className="text-[10px] sm:text-xs opacity-90">
-                  To win ${winnings}
                 </span>
               </div>
             </Button>
