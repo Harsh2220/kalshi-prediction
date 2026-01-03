@@ -45,7 +45,7 @@ export function MarketCard({ id, title, image, volume }: MarketCardProps) {
           <div className="p-3 sm:p-4">
             <div className="flex gap-3 sm:gap-4">
               {/* Image */}
-              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-700 shrink-0">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl overflow-hidden">
                 {image ? (
                   <img
                     src={image}
